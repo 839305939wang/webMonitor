@@ -1,42 +1,78 @@
 <template>
 	<div class="main_container">
-		<Row type="flex" :gutter="1" :style="{height:'220px'}">
+		<Row type="flex" :gutter="10" :style="{height:'430px'}">
 			<Col span="6" :class="{chart:true}">
-			<Card>
-				<div class="chart" ref="online">
-
-				</div>
-			</Card>
+				<Card :class="{total_chart:true}">
+					<div slot="title" class="total_header">
+						
+					</div>
+					<div class="chart" ref="online">
+	
+					</div>
+				</Card>
 			</Col>
-			<Col span="6" :class="{chart:true}">
-			<Card>
-				<div class="chart" ref="badChat">
-
-				</div>
-			</Card>
-			</Col>
-			<Col span="12" :class="{chart:true}">
-			<Card>
-				<div class="chart" ref="alarmChart">
-
-				</div>
-			</Card>
-			</Col>
+			<Col span="18">
+			    <Row :class="{status_item:true}" :style="{height:'160px'}" :gutter="10">
+			    	<Col span="8" :class="{chart:true}">
+			    		<Card>
+							<div class="chart" ref="badChat">
+			
+							</div>
+						</Card>
+			    	</Col>
+			    	<Col span="8" :class="{chart:true}">
+						<Card>
+							<div class="chart" ref="alarmChart">
+			
+							</div>
+						</Card>
+					</Col>
+					<Col span="8" :class="{chart:true}">
+						<Card>
+							<div class="chart" ref="alarmChart">
+			
+							</div>
+						</Card>
+					</Col>
+			    </Row>
+			    <Row :style="{height:'260px'}" :gutter="10" :class="{table_item:true}">
+			    	<Col span="12" >
+			    		<Card>
+							 <div slot="title" class="card_header">
+							 	<span class="left_title">
+							 		主机访问轨迹
+							 	</span>
+							 	<span class="right_handl">
+							 		更多
+							 	</span>
+							 </div>
+						</Card>
+			    	</Col>
+			    	<Col span="12" :class="">
+						<Card>
+							 <div slot="title" class="card_header">
+								 	<span class="left_title">
+								 		告警消息
+								 	</span>
+								 	<span class="right_handl">
+								 		更多
+								 	</span>
+							</div>
+						</Card>
+					</Col>					
+			    </Row>
+			</Col>			
 		</Row>
-		<Row type="flex" :gutter="1" :style="{height:'220px'}">
-			<Col span="16" :class="{chart:true}">
-			<Tabs value="name1">
-				<Tab-pane label="基本信息" name="name1">标签一的内容</Tab-pane>
-				<Tab-pane label="CPU" name="name2">标签二的内容</Tab-pane>
-				<Tab-pane label="内存" name="name3">标签三的内容</Tab-pane>
-			</Tabs>
-			</Col>
-			<Col span="8" :class="{list:true}">
-			<Table :columns="columns1" :data="data1"></Table>
-			</Col>
-		</Row>
-		<Row type="flex" :gutter="1" :style="{height:'160px'}">
-			<Col span="16" :class="{chart:true}"></Col>
+		<Row type="flex" :gutter="1" :style="{height:'260px'}" :class='{computers:true}'>
+			<Col span="24" :class="">
+						<Card>
+							 <div slot="title"  class="card_header">
+								 	<span class="left_title">
+								 		监控仪表盘
+								 	</span>								
+							</div>
+						</Card>
+			</Col>	
 		</Row>
 	</div>
 </template>
@@ -45,251 +81,14 @@
 	export default {
 		data() {
 				return {
-					columns1: [{
-						title: '设备',
-						key: 'device'
-					}, {
-						title: '报警名称',
-						key: 'name'
-					}, {
-						title: '告警级别',
-						key: 'level'
-					},
-					 {
-						title: '状态',
-						key: 'status'
-					}
-					, {
-						title: '操作',
-						key: 'action',
-						fixed: 'right',
-						width: 120,
-						render: (h, params) => {
-							return h('div', [
-								h('Button', {
-									props: {
-										type: 'text',
-										size: 'small'
-									}
-								}, '查看'),
-								h('Button', {
-									props: {
-										type: 'text',
-										size: 'small'
-									}
-								}, '编辑')
-							]);
-						}
-					}],
-					data1: [{
-						device: "172.12.1.12",
-						name: '温度过高',
-						level: 1,
-						status:0
-					}, {
-						device: "172.12.1.12",
-						name: '温度过高',
-						level: 1,
-						status:0
-					}, {
-						device: "172.12.1.12",
-						name: '温度过高',
-						level: 1,
-						status:0
-					}, {
-						device: "172.12.1.12",
-						name: '温度过高',
-						level: 1,
-						status:0
-					}]
 				}
 			},
 			mounted() {
-				this.onlineChart();
-				this.badChart();
-				this.alarmChart();
+				
 			},
 			methods: {
-				autoSize() { //计算页面
-					var innerHeight = window.innerHeight - 60;
-
-				},
-				onlineChart() {
-					let self = this;
-					this.$store.dispatch("GET_ONLINE", function() {
-						let option = {
-							title: {
-								text: '设备在线统计',
-								x: 'center',
-								textStyle: {
-									color: '#666',
-									//字体风格,'normal','italic','oblique'
-									fontStyle: 'normal',
-									//字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-									fontWeight: 'bold',
-									//字体系列
-									fontFamily: 'sans-serif',
-									//字体大小　　　
-									fontSize: 14
-								}
-							},
-							tooltip: {
-								trigger: 'item',
-								formatter: "{a} <br/>{b} : {c} ({d}%)"
-							},
-							color: ["#19be6b", "#a5b3ac"],
-							legend: {
-								orient: 'horizontal',
-								bottom: 'bottom',
-								data: self.$store.state.online.legend
-							},
-							series: [{
-								name: '访问来源',
-								type: 'pie',
-								radius: '55%',
-								center: ['50%', '50%'],
-								label: {
-									normal: {
-										show: true,
-										position: 'top',
-										formatter: '{c}台'
-									},
-								},
-								data: self.$store.state.online.data,
-								itemStyle: {
-									emphasis: {
-										shadowBlur: 10,
-										shadowOffsetX: 0,
-										shadowColor: 'rgba(0, 0, 0, 0.5)'
-									}
-								},
-
-							}]
-						};
-						var chart = self.$refs["online"];
-						self.echart.init(chart).setOption(option);
-					})
-				},
-				badChart() {
-					let self = this;
-					this.$store.dispatch("GET_ONLINE", function() {
-						let option = {
-							title: {
-								text: '故障统计',
-								x: 'center',
-								textStyle: {
-									color: '#666',
-									//字体风格,'normal','italic','oblique'
-									fontStyle: 'normal',
-									//字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-									fontWeight: 'bold',
-									//字体系列
-									fontFamily: 'sans-serif',
-									//字体大小　　　
-									fontSize: 14
-								}
-							},
-							tooltip: {
-								trigger: 'item',
-								formatter: "{a} <br/>{b} : {c} ({d}%)"
-							},
-							color: ["#19be6b", "#a5b3ac"],
-							legend: {
-								orient: 'horizontal',
-								bottom: 'bottom',
-								data: self.$store.state.online.legend
-							},
-							series: [{
-								name: '访问来源',
-								type: 'pie',
-								radius: '55%',
-								center: ['50%', '50%'],
-								label: {
-									normal: {
-										show: true,
-										position: 'top',
-										formatter: '{c}台'
-									},
-								},
-								data: self.$store.state.online.data,
-								itemStyle: {
-									emphasis: {
-										shadowBlur: 10,
-										shadowOffsetX: 0,
-										shadowColor: 'rgba(0, 0, 0, 0.5)'
-									}
-								},
-
-							}]
-						};
-						var chart = self.$refs["badChat"];
-						self.echart.init(chart).setOption(option);
-					})
-				},
-				alarmChart() {
-					let self = this;
-					let option = {
-						title: {
-							text: '告警变化统计',
-							x: 'center',
-							textStyle: {
-								color: '#666',
-								//字体风格,'normal','italic','oblique'
-								fontStyle: 'normal',
-								//字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-								fontWeight: 'bold',
-								//字体系列
-								fontFamily: 'sans-serif',
-								//字体大小　　　
-								fontSize: 14
-							}
-						},
-						tooltip: {
-							trigger: 'axis'
-						},
-						legend: {
-							bottom: "bottom",
-							data: ['一级告警']
-						},
-						grid: {
-							top: "25px",
-							left: '3%',
-							right: '4%',
-							bottom: '20px',
-							containLabel: true
-						},
-						toolbox: {
-							feature: {
-								saveAsImage: {}
-							}
-						},
-						xAxis: {
-							type: 'category',
-							data: self.$store.state.alarm.time
-						},
-						yAxis: {
-							type: 'value'
-						},
-						series: [{
-							name: '一级告警',
-							type: 'line',
-							step: 'start',
-							data: self.$store.state.alarm.data
-						}]
-					};
-
-					var chart = self.$refs["alarmChart"];
-					self.$store.dispatch("GET_ALARM", function() {
-						self.echart.init(chart).setOption(option);
-					})
-					setInterval(function() {
-						self.$store.dispatch("GET_ALARM", function() {
-							self.echart.init(chart).setOption(option);
-						})
-					}, 3000)
-
-				}
-			}
+				
+			}			
 	}
 </script>
 
@@ -300,7 +99,7 @@
 	}
 	
 	.main_container {
-		overflow-x: hidden;
+		padding:10px;
 	}
 	
 	.ivu-row-flex>.ivu-col>.ivu-card {
@@ -312,12 +111,54 @@
 		padding: 5px
 	}
 	
-	.ivu-row-flex>.ivu-col>.ivu-card>.ivu-card-body {
-		height: 100%;
+
+
+	.ivu-card-head{
+		background: #f5f5f5;
+	}
+	.card_header{
+		position: relative;
+		height:40px;
+		padding:5px;
+		line-height: 30px;
+		font-size:16px;
+		
+	}
+	.left_title{
+		float: left;
+	}
+	.right_handl{
+		float: right;
+	}
+	.total_chart .ivu-card-head{
+		height:100px;
+		background:#a992e2;
+	}
+	.total_chart .ivu-card-body{
+		background: #e7e0f8;
+	}
+	.status_item{
+		margin-bottom: 10px;
+	}
+	.status_item>.ivu-col{
+		height:100%;
+	}
+	.ivu-card{
 		height: 100%;
 	}
-	
-	.chart {
+	.status_item .ivu-card:nth-of-type(1){
+		background: #55badf;
+	}
+	.status_item .ivu-card:nth-of-type(2){
+		background: #eb5e3c;
+	}
+	.status_item .ivu-card:nth-of-type(3){
+		background: #7696de;
+	}
+	.table_item .ivu-col{
 		height: 100%;
+	}
+	.computers{
+	  margin-top: 20px;	
 	}
 </style>

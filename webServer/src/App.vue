@@ -47,7 +47,7 @@
    .headerBar{
         width: 100%;
         height: 60px;
-        background:blanchedalmond;
+        background:#0d67b7;
         padding: 10px 20px;
      }
      .headerBar .item{
