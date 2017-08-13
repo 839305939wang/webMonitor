@@ -1,41 +1,63 @@
 <template>
 	<div class="main_container">
-		<Row type="flex" :gutter="10" :style="{height:'430px'}">
+		<Row type="flex" :gutter="10" :style="{height:'360px'}">
 			<Col span="6" :class="{chart:true}">
 				<Card :class="{total_chart:true}">
 					<div slot="title" class="total_header">
-						
+                         <p>主机</p>
+                         <div class="total_header_content">
+                         	<div class="total_header_content_left">
+                         		<div>
+                         			<span><span style="font-size:30px;font-weight: bold;">9</span>台</span>
+                         		</div>
+                         	</div>
+                         	<div class="total_header_content_right">
+                         		<ul>
+                         			<li><span>通信总线服务器 : </span><span>3台</span></li>
+                         			<li><span>通信总线服务器 : </span><span>3台</span></li>
+                         			<li><span>通信总线服务器 : </span><span>3台</span></li>
+                         		</ul>                   		
+                         	</div>
+                         </div>
 					</div>
-					<div class="chart" ref="online">
-	
+					<div class="total_content">
+	                      <div class="online_chart">
+	                      	   <span>9</span>
+	                      </div>
+	                       <div class="chart_desc">
+	                      	  <div class="online_type normal"><span class="online_type_icon normal_icon"></span><span>正常运行:</span>8</div>
+	                      	  <div class="online_type alarming"><span class="online_type_icon alarming_icon"></span><span>正常运行:</span>8</div>
+	                      	  <div class="online_type hasStop"><span class="online_type_icon hasStop_icon"></span><span>正常运行:</span>8</div>
+	                      	  <div class="online_type release"><span class="online_type_icon release_icon"></span><span>正常运行:</span>8</div>
+	                      </div>
 					</div>
 				</Card>
 			</Col>
 			<Col span="18">
-			    <Row :class="{status_item:true}" :style="{height:'160px'}" :gutter="10">
+			    <Row :class="{status_item:true}" :style="{height:'105px'}" :gutter="10">
 			    	<Col span="8" :class="{chart:true}">
-			    		<Card>
+			    		<Card :style="{background:'#19be6b'}">
 							<div class="chart" ref="badChat">
 			
 							</div>
 						</Card>
 			    	</Col>
 			    	<Col span="8" :class="{chart:true}">
-						<Card>
+						<Card :style="{background:'#eb5e3c'}">
 							<div class="chart" ref="alarmChart">
-			
+			        
 							</div>
 						</Card>
 					</Col>
 					<Col span="8" :class="{chart:true}">
-						<Card>
+						<Card :style="{background:'#7696de'}">
 							<div class="chart" ref="alarmChart">
 			
 							</div>
 						</Card>
 					</Col>
 			    </Row>
-			    <Row :style="{height:'260px'}" :gutter="10" :class="{table_item:true}">
+			    <Row :style="{height:'245px'}" :gutter="10" :class="{table_item:true}">
 			    	<Col span="12" >
 			    		<Card>
 							 <div slot="title" class="card_header">
@@ -96,10 +118,12 @@
 	* {
 		padding: 0;
 		margin: 0;
+		text-align: left;
 	}
 	
 	.main_container {
 		padding:10px;
+		color: white;
 	}
 	
 	.ivu-row-flex>.ivu-col>.ivu-card {
@@ -131,11 +155,8 @@
 		float: right;
 	}
 	.total_chart .ivu-card-head{
-		height:100px;
+		min-height:100px;
 		background:#a992e2;
-	}
-	.total_chart .ivu-card-body{
-		background: #e7e0f8;
 	}
 	.status_item{
 		margin-bottom: 10px;
@@ -149,16 +170,94 @@
 	.status_item .ivu-card:nth-of-type(1){
 		background: #55badf;
 	}
-	.status_item .ivu-card:nth-of-type(2){
-		background: #eb5e3c;
-	}
-	.status_item .ivu-card:nth-of-type(3){
-		background: #7696de;
-	}
+	
 	.table_item .ivu-col{
 		height: 100%;
 	}
 	.computers{
 	  margin-top: 20px;	
+	}
+	.total_header_content{
+		position: relative;
+		min-height:65px;
+		display: flex;
+		display: -webkit-flex;
+		align-content: center;
+		justify-content: center;
+		color: white;
+	}
+	.total_chart{
+		background: #e7e0f8;
+	}
+	.total_chart .ivu-card-head p{
+		color: white;
+	}
+	.total_header_content_left{
+		width:60px;
+		height: 60px;
+		margin:5px;
+		line-height: 60px;
+		display: flex;
+		display: -webkit-flex;
+		align-content: center;
+		justify-content: center;
+	}
+	.total_header_content_left>p{
+		text-align: center;
+	}
+	.total_header_content_right{
+		min-width:60px;
+		min-height: 60px;
+		margin:5px;
+		
+	}
+	.total_header_content_right>ul>li{
+		margin:2px;
+		list-style: circle;
+	}
+	.total_content{
+		text-align: center;
+	}
+	.online_chart{
+		height:130px;
+		width: 130px;
+		border: 5px solid green;
+		border-radius: 50%;
+		display: inline-block;
+		line-height:130px;
+		font-family: "agency fb";
+		font-size:35px;
+		text-align: center;
+	}
+	.chart_desc{
+		display: flex;
+		display: -webkit-flex;
+		align-content: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		padding-top: 16px;
+	}
+	.online_type{
+		display: inline-block;
+		width: 100px		
+	}
+	.online_type_icon{
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		margin-right:5px;
+	}
+	.normal_icon{		
+		background: green;
+	}
+	.alarming_icon{
+		background: yellow;
+	}
+	.hasStop_icon{
+		background: gray;
+	}
+	.release_icon{
+		background: orangered;
 	}
 </style>
