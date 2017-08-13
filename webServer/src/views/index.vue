@@ -38,21 +38,22 @@
 			    	<Col span="8" :class="{chart:true}">
 			    		<Card :style="{background:'#19be6b'}">
 							<div class="chart" ref="badChat">
-			
+			                  
 							</div>
 						</Card>
 			    	</Col>
 			    	<Col span="8" :class="{chart:true}">
 						<Card :style="{background:'#eb5e3c'}">
-							<div class="chart" ref="alarmChart">
-			        
+							<div class="chart alarm_item" ref="alarmChart">
+			                      <Icon size="50" type="android-notifications-none"></Icon>
+                                
 							</div>
 						</Card>
 					</Col>
 					<Col span="8" :class="{chart:true}">
 						<Card :style="{background:'#7696de'}">
 							<div class="chart" ref="alarmChart">
-			
+			                      <Icon size="48" type="person-stalker"></Icon>
 							</div>
 						</Card>
 					</Col>
@@ -64,8 +65,11 @@
 							 	<span class="left_title">
 							 		主机访问轨迹
 							 	</span>
+							 	<span>
+							 		<Icon size="25" type="ios-location-outline"></Icon>
+							 	</span>
 							 	<span class="right_handl">
-							 		更多
+							 		<a href="">更多</a>
 							 	</span>
 							 </div>
 						</Card>
@@ -76,8 +80,11 @@
 								 	<span class="left_title">
 								 		告警消息
 								 	</span>
+								 	<span>
+								 		<Icon size="25" type="ios-chatboxes-outline"></Icon>
+								 	</span>
 								 	<span class="right_handl">
-								 		更多
+								 		<a href="">更多</a>
 								 	</span>
 							</div>
 						</Card>
@@ -89,9 +96,9 @@
 			<Col span="24" :class="">
 						<Card>
 							 <div slot="title"  class="card_header">
-								 	<span class="left_title">
-								 		监控仪表盘
-								 	</span>								
+								 	<span class="left_title">监控仪表盘</span>
+								 	<Icon size="25" type="stats-bars"></Icon>
+								 	
 							</div>
 						</Card>
 			</Col>	
@@ -149,7 +156,8 @@
 		
 	}
 	.left_title{
-		float: left;
+		float:left;
+		margin-right:10px;
 	}
 	.right_handl{
 		float: right;
