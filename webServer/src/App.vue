@@ -2,17 +2,85 @@
   <div id="app">
   	 <div class="headerBar">
                <div class="item logo">
-                  LOGO
+                  YS
                </div>
-                <div class="item logo">
-                  <router-link to="{path:'/index'}">跳转</router-link>
+                <div class="item menu_list_icon">
+                	 <Poptip v-model="menuShow" placement="bottom-start">
+							        <div class="imgItem" :style="{top:'40px'}">
+			                 	 <div class="icon">
+			                 	 	  <Icon type="ios-home-outline"></Icon>
+			                 	 </div>
+			                   <span>主页</span>
+			                </div>
+							        <div slot="content" class="menu_list">
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div> <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							             <div class="menu_item"></div>
+							        </div>
+							    </Poptip>
+	                 
+               </div>
+               <div class="item right search_icon">
+               	    <Poptip v-model="searchShow" placement="bottom-end">
+							         <div class="imgItem">
+		                     <div class="icon">		                     	
+												     <Icon type="ios-search" size="20"></Icon>
+			                 	 </div>
+		                  </div>
+		                  <div slot="content" class="search_content">
+								            <Input v-model="value" placeholder="请输入主机名称" style="width: 300px"></Input>
+								            <Button type="ghost" shape="circle" icon="ios-search"></Button>
+								      </div>
+		                </Poptip>
+               </div>
+              <div class="item right msg_list_icon">
+                  <Poptip v-model="msgListShow" placement="bottom-end">
+							         <div class="imgItem">
+		                     <div class="icon">
+		                     	 <Badge dot>
+												         <Icon type="ios-email-outline" size="28" :class="{msg_icon:false}"></Icon>
+												    </Badge>
+			                 	 </div>
+		                   </div>
+		                    <div slot="title" class="msg_list_title">
+		                    	   <Button type="text" size="small" :class="{left:true}">系统消息</Button>
+								             <Button type="ghost" size="small" :class="{right:true}">忽略</Button>
+								        </div>
+			                  <div slot="content" class="msg_list">
+								             <ul>
+									             	<li class="msg_item"></li>
+									             	<li class="msg_item"></li>
+									             	<li class="msg_item"></li>
+								             </ul>
+								        </div>
+							    </Poptip> 
+               </div>
+
+               <div class="item person">
+	               	<Poptip v-model="personShow" placement="bottom">
+								         <div class="person_head imgItem">
+			                      <img src="./static/images/one.jpg" alt="" />
+			                      <span>yangyang</span>
+			                   </div>
+			                    <ul class="person_info_list" slot="content">
+								              <li>
+								              	<a>个人信息</a>
+								              </li>
+								              <li>
+								              	<a>系统设置</a>
+								              </li>
+								              <li>
+								              	<a>注销</a>
+								              </li>
+								          </ul>
+								    </Poptip> 
                </div>
                
-               <div class="item person">
-                   <div class="person_head">
-                      <img src="./static/images/one.jpg" alt="" />
-                   </div>
-               </div>
      </div>
      <router-view></router-view>
   </div>
@@ -22,8 +90,17 @@
   import 'common/css/reset.css';
   export default {
     name: 'app',
+    data(){
+    	return {
+    		menuShow:false,
+    		personShow:false,
+    		searchShow:false
+    	}
+    },
     methods:{
-    
+       close(){
+       	this.menuShow = !this.menuShow
+       }
     }
   }
 </script>
@@ -52,18 +129,110 @@
      }
      .headerBar .item{
         height:40px;
-        min-width: 80px;
+        min-width: 40px;
         line-height:40px;
+        text-align: center;
+        display: inline-block;
+     }
+     .imgItem{
+     	   display:flex;
+         display: -webkit-flex;
+         align-items: center;
+         height:100%;
+     }
+     .imgItem .icon{
+     	    width:30px;
+          height:30px;
+          font-size: 20px;
+          color: white;
+          line-height: 30px;
+          text-align: center;
      }
       .headerBar .item.logo{
          float: left;
+         font-size: 16px;
+         color: #FA8072
      }
+     .imgItem img{
+         width:30px;
+         height:30px;
+         border:1px solid grayscale;
+      }
+      .imgItem span{
+      	margin-left: 5px;
+      	font-size: 16px;
+      	color: white;
+      }
      .headerBar .item.person{
         float: right;
      }
-     .person_head,.person_head img{
-     	height: 40px;
-     	width: 40px;
+     .person_head img{
+     	height: 30px;
+     	width: 30px;
      	border-radius: 50%;
      }
+     .ivu-poptip-content{
+     	box-shadow: 0 0 14px -4px #000;
+     }
+     ul.person_info_list>li{
+     	line-height:30px;
+     	padding:3px 10px;
+     	border-bottom: 1px solid gainsboro;
+     	font-size: 13px;
+   /*  	font-weight: 600;*/
+     	
+     }
+    ul.person_info_list>li>a{
+    	color: #333;
+    }
+		.person .ivu-poptip-body{
+			padding: 0px 0px;
+		}
+		.msg_icon{
+			  width: 35px;
+        height: 35px;
+        background: #eee;
+        border-radius: 6px;
+        display: inline-block;
+		}
+		.right{
+			float: right;
+		}
+		.left{
+			float: left;
+		}
+		.msg_list_icon .ivu-poptip,.msg_list_icon .ivu-poptip-rel{
+			height: 100%;
+		}
+		.msg_list_icon .ivu-poptip-popper{
+			
+		}
+		.msg_list_title{
+			height: 24px;
+		}
+		.msg_list>ul{
+			width: 350px;
+		}
+		.menu_list_icon{
+			margin-left:30px;
+		}
+		.menu_list{
+			max-width:360px;
+			display: flex;
+			display: -webkit-flex;
+			flex-wrap: wrap;
+		}
+		.menu_list>.menu_item{
+			width:45px;
+			height: 45px;
+			margin:3px;
+			border: 1px solid salmon;
+		}
+		
+		.search_content{
+			width:340px;
+		}
+		.search_icon .ivu-poptip-rel{
+			margin-top: 8px;
+		}
 </style>
