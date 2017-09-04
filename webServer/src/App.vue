@@ -2,7 +2,7 @@
   <div id="app">
   	 <div class="headerBar">
                <div class="item logo">
-                  YS
+                  <span>YSM</span>
                </div>
                 <div class="item menu_list_icon">
                 	 <Poptip v-model="menuShow" placement="bottom-start">
@@ -13,14 +13,38 @@
 			                   <span>主页</span>
 			                </div>
 							        <div slot="content" class="menu_list">
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div> <div class="menu_item"></div>
-							             <div class="menu_item"></div>
-							             <div class="menu_item"></div>
+							             <div class="menu_item main_index">
+								             	 <Tooltip content="主页">
+														          <img src="./static/images/0.png"/>
+														   </Tooltip>
+							             	  
+							             </div>
+							             <div class="menu_item main_com">
+							             	 <Tooltip content="主机">
+													         <img src="./static/images/1.png"/>
+													   </Tooltip> 
+							             </div>
+							             <div class="menu_item main_dash">
+							             	 <Tooltip content="磁盘">
+													         <img src="./static/images/2.png"/>
+													   </Tooltip>
+							             	     
+							             </div>
+							             <div class="menu_item main_tijian">
+							             	 <Tooltip content="体检中心">
+													         <img src="./static/images/3.png"/>
+													   </Tooltip>
+							             </div>
+							             <div class="menu_item main_work">
+							             	 <Tooltip content="作业中心">
+													          <img src="./static/images/4.png"/>
+													   </Tooltip>							             	    
+							             </div>
+							             <div class="menu_item main_log">
+							             	 <Tooltip content="操作日志">
+													         <img src="./static/images/5.png"/>
+													   </Tooltip>  
+							             </div>							          
 							        </div>
 							    </Poptip>
 	                 
@@ -129,7 +153,7 @@
      }
      .headerBar .item{
         height:40px;
-        min-width: 40px;
+        min-width: 60px;
         line-height:40px;
         text-align: center;
         display: inline-block;
@@ -217,18 +241,24 @@
 			margin-left:30px;
 		}
 		.menu_list{
-			max-width:360px;
+			max-width:320px;
 			display: flex;
 			display: -webkit-flex;
 			flex-wrap: wrap;
 		}
 		.menu_list>.menu_item{
-			width:45px;
-			height: 45px;
+			width:58px;
+			height: 58px;
 			margin:3px;
-			border: 1px solid salmon;
 		}
-		
+		.menu_list>.menu_item:hover{
+			background:#f3eeed;
+		}
+		.menu_list>.menu_item img{
+			width: 57px;
+			height: 57px;
+			text-align: center;
+		}
 		.search_content{
 			width:340px;
 		}

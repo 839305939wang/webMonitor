@@ -1,6 +1,6 @@
 <template>
 	<div class="main_container">
-		<Row type="flex" :gutter="10" :style="{height:'360px'}">
+		<Row type="flex" :gutter="10" :style="{height:'400px'}">
 			<Col span="6" :class="{chart:true}">
 				<Card :class="{total_chart:true}">
 					<div slot="title" class="total_header">
@@ -31,10 +31,13 @@
 	                      	  <div class="online_type release"><span class="online_type_icon release_icon"></span><span>正常运行:</span>8</div>
 	                      </div>
 					</div>
+					<div class="total_icon">
+						
+					</div>
 				</Card>
 			</Col>
 			<Col span="18">
-			    <Row :class="{status_item:true}" :style="{height:'105px'}" :gutter="10">
+			    <Row :class="{status_item:true}" :style="{height:'110px'}" :gutter="10">
 			    	<Col span="8" :class="{chart:true}">
 			    		<Card :style="{background:'#19be6b'}">
 							<div class="chart" ref="badChat">
@@ -44,9 +47,9 @@
 			    	</Col>
 			    	<Col span="8" :class="{chart:true}">
 						<Card :style="{background:'#eb5e3c'}">
+							<h4 class="">体检中心</h4>
 							<div class="chart alarm_item" ref="alarmChart">
-			                      <Icon size="50" type="android-notifications-none"></Icon>
-                                
+                                <Icon size="50" type="ios-medkit-outline"></Icon>
 							</div>
 						</Card>
 					</Col>
@@ -58,11 +61,11 @@
 						</Card>
 					</Col>
 			    </Row>
-			    <Row :style="{height:'245px'}" :gutter="10" :class="{table_item:true}">
+			    <Row :style="{height:'290px'}" :gutter="10" :class="{table_item:true}">
 			    	<Col span="12" >
 			    		<Card>
 							 <div slot="title" class="card_header">
-							 	<span class="left_title">
+			<span class="left_title">
 							 		主机访问轨迹
 							 	</span>
 							 	<span>
@@ -92,13 +95,20 @@
 			    </Row>
 			</Col>			
 		</Row>
-		<Row type="flex" :gutter="1" :style="{height:'260px'}" :class='{computers:true}'>
+		<Row type="flex" :gutter="1" :style="{height:'280px'}" :class='{computers:true}'>
 			<Col span="24" :class="">
 						<Card>
 							 <div slot="title"  class="card_header">
 								 	<span class="left_title">监控仪表盘</span>
-								 	<Icon size="25" type="stats-bars"></Icon>
-								 	
+								 	<Button type="ghost" size="small">+</Button>							 	
+							</div>
+							<div class="card_content">
+								  <div v-if="computer==0" class="no_computer">
+								  	   <div class="add_computer">
+								  	   	   <p>可以将你特别关注的主机添加到这里</p>
+								  	   	   <Button type="success">立即添加</Button>
+								  	   </div>
+								  </div>
 							</div>
 						</Card>
 			</Col>	
@@ -110,6 +120,7 @@
 	export default {
 		data() {
 				return {
+					 computer:0
 				}
 			},
 			mounted() {
@@ -158,6 +169,7 @@
 	.left_title{
 		float:left;
 		margin-right:10px;
+		color: #3f3f3f;
 	}
 	.right_handl{
 		float: right;
@@ -195,7 +207,7 @@
 		color: white;
 	}
 	.total_chart{
-		background: #e7e0f8;
+		background: #b7a6e0;
 	}
 	.total_chart .ivu-card-head p{
 		color: white;
@@ -224,18 +236,30 @@
 		list-style: circle;
 	}
 	.total_content{
+		margin-top:15px;
 		text-align: center;
+	}
+	.total_icon{
+		width:70px;
+		height: 70px;
+		position:absolute;
+		right: 5px;
+		bottom: 5px;
+		background:url(../static/images/total_ng.png);
 	}
 	.online_chart{
 		height:130px;
 		width: 130px;
-		border: 5px solid green;
+		color: #3f3f3f;
+		font-weight: bolder;
+		border: 3px solid green;
 		border-radius: 50%;
 		display: inline-block;
-		line-height:130px;
+		line-height:110px;
 		font-family: "agency fb";
 		font-size:35px;
 		text-align: center;
+		background: #f3f3f3;
 	}
 	.chart_desc{
 		display: flex;
@@ -267,5 +291,28 @@
 	}
 	.release_icon{
 		background: orangered;
+	}
+	
+	.card_content{
+		position: relative;
+		margin: 0 auto;
+		height:250px;
+		width:750px;
+		border: 0px solid yellowgreen;
+		background: url(../static/images/bg2.png) no-repeat;
+	}
+	.no_computer>.add_computer{
+		text-align: center;
+		position: absolute;
+		left: 62%;
+		top:40%;
+
+	}
+	.no_computer>.add_computer>p{
+		 color: slategray;
+		 font-size: 15px;
+	}
+	.no_computer>.add_computer>button{
+		margin-top: 10px;
 	}
 </style>
