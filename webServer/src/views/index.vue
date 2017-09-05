@@ -63,9 +63,9 @@
 			    </Row>
 			    <Row :style="{height:'290px'}" :gutter="10" :class="{table_item:true}">
 			    	<Col span="12" >
-			    		<Card>
+			    		<Card padding="0 0 0 15" :class="{mark_card:true}">
 							 <div slot="title" class="card_header">
-			<span class="left_title">
+			                    <span class="left_title">
 							 		主机访问轨迹
 							 	</span>
 							 	<span>
@@ -74,6 +74,13 @@
 							 	<span class="right_handl">
 							 		<a href="">更多</a>
 							 	</span>
+							 </div>
+							 <div class="mark_list">
+							 	<workMark></workMark>
+							 	<workMark></workMark>
+							 	<workMark></workMark>
+							 	<workMark></workMark>
+							 	<workMark></workMark>
 							 </div>
 						</Card>
 			    	</Col>
@@ -117,6 +124,7 @@
 </template>
 
 <script>
+	import workMark from "../components/workMark/workMark.vue"
 	export default {
 		data() {
 				return {
@@ -128,7 +136,10 @@
 			},
 			methods: {
 				
-			}			
+			},
+			components:{
+				"workMark":workMark
+			}
 	}
 </script>
 
@@ -314,5 +325,8 @@
 	}
 	.no_computer>.add_computer>button{
 		margin-top: 10px;
+	}
+	.mark_card .ivu-card-body{
+		padding:15px 0px;
 	}
 </style>
