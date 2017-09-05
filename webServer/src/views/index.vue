@@ -85,7 +85,7 @@
 						</Card>
 			    	</Col>
 			    	<Col span="12" :class="">
-						<Card>
+						<Card :class="{card_alarm:true}" padding="0">
 							 <div slot="title" class="card_header">
 								 	<span class="left_title">
 								 		告警消息
@@ -96,6 +96,9 @@
 								 	<span class="right_handl">
 								 		<a href="">更多</a>
 								 	</span>
+							</div>
+							<div>
+								<alarmBox></alarmBox>
 							</div>
 						</Card>
 					</Col>					
@@ -124,7 +127,8 @@
 </template>
 
 <script>
-	import workMark from "../components/workMark/workMark.vue"
+	import workMark from "../components/workMark/workMark.vue";
+	import alarmBox from "../components/alarm_table";
 	export default {
 		data() {
 				return {
@@ -138,7 +142,8 @@
 				
 			},
 			components:{
-				"workMark":workMark
+				workMark,
+				alarmBox
 			}
 	}
 </script>
@@ -328,5 +333,8 @@
 	}
 	.mark_card .ivu-card-body{
 		padding:15px 0px;
+	}
+	.card_alarm .ivu-card-body{
+		height:80%;
 	}
 </style>
