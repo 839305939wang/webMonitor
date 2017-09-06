@@ -7,10 +7,12 @@ import iView from 'iview';
 import echart from "echarts";
 import store from "./store/store"
 import 'iview/dist/styles/iview.css';
+import highcharts from 'highcharts';
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(iView);
 Vue.prototype.echart = echart;
+Vue.prototype.highcharts = highcharts;
 // 路由配置
 const RouterConfig = {
     mode: 'history',

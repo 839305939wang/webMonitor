@@ -105,45 +105,150 @@
 			    </Row>
 			</Col>			
 		</Row>
-		<Row type="flex" :gutter="1" :style="{height:'280px'}" :class='{computers:true}'>
+		<Row type="flex" :gutter="1" :style="{minHeight:'280px'}" :class='{computers:true}'>
 			<Col span="24" :class="">
 						<Card>
 							 <div slot="title"  class="card_header">
 								 	<span class="left_title">监控仪表盘</span>
-								 	<Button type="ghost" size="small">+</Button>							 	
+								 	<Button type="ghost" size="small" @click="showAddCard();">+</Button>							 	
 							</div>
-							<div class="card_content">
-								  <div v-if="computer==0" class="no_computer">
+							<div v-if="computer==0" class="empty_monitor">
+								  <div class="no_computer">
 								  	   <div class="add_computer">
 								  	   	   <p>可以将你特别关注的主机添加到这里</p>
-								  	   	   <Button type="success">立即添加</Button>
+								  	   	   <Button type="success" @click="showAddCard();">立即添加</Button>
 								  	   </div>
 								  </div>
+							</div>
+							<div class="mintor_List">
+								<computer></computer>
+								<computer></computer>
+								<computer></computer>
+								<computer></computer>
 							</div>
 						</Card>
 			</Col>	
 		</Row>
+		
+		<Modal
+        v-model="addmodel"
+        width="650"
+        class-name="vertical-center-modal">
+            <div class="addHead">
+            	<div class="add_title">
+            		 <h2>添加关注的主机</h2>
+            		 <p class="desc">将您特别关注的主机添加到仪表盘中（最多可添加15台）</p>
+            	</div>          
+            </div>
+            <div class="addBody">
+            	 <Tabs value="linux">
+            	 	<TabPane label="linux" name="linux" icon="social-tux" >
+			        	<Table :columns="columns" :data="linux_data" @on-selection-change="selectChange"></Table>
+			        </TabPane>
+			        <TabPane label="win" name="win" icon="social-windows">
+			        	<Table :columns="columns" :data="win_data" @on-selection-change="selectChange"></Table>
+			        </TabPane>
+			        <TabPane label="mac" name="mac" icon="social-apple">
+			        	<Table :columns="columns" :data="mac_data" @on-selection-change="selectChange"></Table>
+			        </TabPane>			       
+			    </Tabs>
+            </div>
+            <div slot="footer" class="add_footer">
+            	<div class="btn_group">
+            		<Button type="ghost" @click="cancel">取消</Button>
+            	    <Button type="success" @click="add">添加</Button>
+            	</div>
+            </div>
+        </Modal>
+		
 	</div>
 </template>
 
 <script>
 	import workMark from "../components/workMark/workMark.vue";
 	import alarmBox from "../components/alarm_table";
+	import computer from "../components/computer";
+	
 	export default {
 		data() {
 				return {
-					 computer:0
-				}
+					 computer:1,
+					 addmodel:false,
+					 columns:[
+						 {
+						 	type: 'selection',
+	                        width: 60,
+	                        align: 'center'
+	                     },
+						 {
+	                        title: '主机名称',
+	                        key: 'name'
+	                    },
+	                    {
+	                        title: '主机IP',
+	                        key: 'ip'
+	                    },
+	                    {
+	                        title: '状态',
+	                        key: 'status',
+	                        render:(h, params) => {
+	                            return h('span', {
+	                                  style:{
+	                                        color: 'green'
+	                                    },
+	                                   on:{
+	                                        click: () => {
+	                                            /*this.show(params.index)*/
+	                                        }
+	                                    }
+	                            },"正常运行");
+	                        }
+	                     }   
+                    ],
+                    linux_data:[
+                     {
+                        name: 'SESU-12.8',
+                        ip: "172.10.2.15",
+                        status: '1',
+                        id:"001"
+                    },
+                    {
+                        name: 'ubantu-10.8',
+                        ip: "172.10.2.16",
+                        ststus: '2',
+                        id:"002"
+                    },
+                    {
+                        name: 'SESU-12.8-01',
+                        ip: "172.10.2.17",
+                        ststus: '1',
+                        id:"003"
+                    }],
+					mac_data:[],
+					win_data:[]
+				}	
 			},
 			mounted() {
 				
 			},
 			methods: {
-				
+				showAddCard(){
+					this.addmodel=true
+				},
+				cancel(){
+					this.addmodel=false
+				},
+				add(){
+					 
+				},
+				selectChange(select){
+					console.log(select);
+				}
 			},
 			components:{
 				workMark,
-				alarmBox
+				alarmBox,
+				computer,
 			}
 	}
 </script>
@@ -309,7 +414,7 @@
 		background: orangered;
 	}
 	
-	.card_content{
+	.empty_monitor{
 		position: relative;
 		margin: 0 auto;
 		height:250px;
@@ -337,4 +442,63 @@
 	.card_alarm .ivu-card-body{
 		height:80%;
 	}
+    .vertical-center-modal .ivu-modal{
+    	    position: absolute;
+    	    left: 50%;
+    	    margin-left: -300px;
+            top: 50%;
+    	    margin-top: -250px;
+        }
+    .addHead{
+    	height:100px;
+    	background: #577cce;
+    	background: url(../static/images/add.png)  95% 50% no-repeat #577cce;
+    }
+    .vertical-center-modal .ivu-modal-body{
+    	height:350px;
+    	padding: 0px;
+    }
+    .add_title{
+    	width:350px;
+    	height:100%;
+    	color: white;
+    }
+    .add_title h2,.add_title p{
+    	text-align: center;
+
+    }
+    .add_title h2{
+    	line-height:70px;
+    }   
+    .add_title p{
+    	line-height:0px;
+
+    }
+    .addBody .ivu-tabs-bar{
+       margin-bottom: 0px;	
+    }
+    .addBody{
+    	padding:0 10px;
+    	height:250px;
+    }
+     .add_footer{
+    	height:50px;
+    	background: #F7F9FB;
+    }
+    .vertical-center-modal .ivu-modal-footer{
+    	padding: 0px;
+    }
+    .btn_group{
+    	width:130px;
+    	float: right;
+    	margin-right:10px;
+    	margin-top:10px;
+    }
+    .mintor_List{
+    	width: 100%;
+    	height:100%;   	
+    }
+    .ivu-card-body{
+    	height: 81%;
+    }
 </style>

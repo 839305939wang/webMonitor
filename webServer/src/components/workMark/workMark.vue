@@ -29,7 +29,7 @@
 		    markInfo:{
 		    	type:Object,
 		    	default:{
-		    		person_head:'../../../static/images/one.jpg',
+		    		person_head:'../../../static/images/head.jpg',
 		    		person_name:"zhangShan",
 		    		dist:'访问主机',
 		    		computer_type:0,

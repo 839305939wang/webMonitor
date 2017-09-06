@@ -9,6 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "highcharts": "^v5.0.14",
     "vue": "^2.0.1"
   },
   "devDependencies": {
