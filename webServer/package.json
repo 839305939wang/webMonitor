@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "highcharts": "^v5.0.14",
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "vue-highcharts": "^0.0.10"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
