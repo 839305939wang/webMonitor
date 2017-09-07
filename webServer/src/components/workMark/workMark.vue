@@ -28,12 +28,14 @@
 		props:{
 		    markInfo:{
 		    	type:Object,
-		    	default:{
-		    		person_head:'../../../static/images/head.jpg',
-		    		person_name:"zhangShan",
-		    		dist:'访问主机',
-		    		computer_type:0,
-		    		computer_namw:'OpenSuSe'
+		    	default:function(){
+		    		return {
+				    		person_head:'../../../static/images/head.jpg',
+				    		person_name:"zhangShan",
+				    		dist:'访问主机',
+				    		computer_type:0,
+				    		computer_namw:'OpenSuSe'
+				    	}
 		    	}
 		    }
 		}

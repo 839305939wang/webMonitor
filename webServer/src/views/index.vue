@@ -112,7 +112,7 @@
 								 	<span class="left_title">监控仪表盘</span>
 								 	<Button type="ghost" size="small" @click="showAddCard();">+</Button>							 	
 							</div>
-							<div v-if="computer==0" class="empty_monitor">
+							<div v-if="computer_list.length==0" class="empty_monitor">
 								  <div class="no_computer">
 								  	   <div class="add_computer">
 								  	   	   <p>可以将你特别关注的主机添加到这里</p>
@@ -121,10 +121,13 @@
 								  </div>
 							</div>
 							<div class="mintor_List">
+								<!--<transition enter-active-calss="fadeIn" leave-active-class="fadeOut">
+									<computer v-for="info in computer_list" :key="info.id"></computer>
+								</transition>-->
+								<computer v-for="info in computer_list" :key="info.id" :Data="info" @deleteComputer="deleteComputer"></computer>
+							<!--	<computer></computer>
 								<computer></computer>
-								<computer></computer>
-								<computer></computer>
-								<computer></computer>
+								<computer></computer>-->
 							</div>
 						</Card>
 			</Col>	
@@ -172,7 +175,11 @@
 	export default {
 		data() {
 				return {
-					 computer:1,
+					 computer_list:[
+					   {id:"001"},
+					   {id:"002"},
+					   {id:"003"}
+					 ],
 					 addmodel:false,
 					 columns:[
 						 {
@@ -232,6 +239,14 @@
 				
 			},
 			methods: {
+				deleteComputer(id){
+					console.log("id:"+id);
+					this.computer_list = this.computer_list.filter(function(item){
+						if(item.id!=id){
+						   return item	
+						}						
+					})
+				},
 				showAddCard(){
 					this.addmodel=true
 				},

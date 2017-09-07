@@ -8,6 +8,7 @@ import echart from "echarts";
 import store from "./store/store"
 import 'iview/dist/styles/iview.css';
 import highcharts from 'highcharts';
+import "./common/css/animate.css"
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(iView);
