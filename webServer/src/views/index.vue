@@ -121,13 +121,7 @@
 								  </div>
 							</div>
 							<div class="mintor_List">
-								<!--<transition enter-active-calss="fadeIn" leave-active-class="fadeOut">
-									<computer v-for="info in computer_list" :key="info.id"></computer>
-								</transition>-->
 								<computer v-for="info in computer_list" :key="info.id" :Data="info" @deleteComputer="deleteComputer"></computer>
-							<!--	<computer></computer>
-								<computer></computer>
-								<computer></computer>-->
 							</div>
 						</Card>
 			</Col>	
@@ -136,7 +130,7 @@
 		<Modal
         v-model="addmodel"
         width="650"
-        class-name="vertical-center-modal">
+        class-name="vertical-center-modal" @on-cancel="modalCancel">
             <div class="addHead">
             	<div class="add_title">
             		 <h2>添加关注的主机</h2>
@@ -146,20 +140,20 @@
             <div class="addBody">
             	 <Tabs value="linux">
             	 	<TabPane label="linux" name="linux" icon="social-tux" >
-			        	<Table :columns="columns" :data="linux_data" @on-selection-change="selectChange"></Table>
+			        	<Table :columns="columns" :data="linux_data" @on-select="select" @on-select-cancel="selectCancel" @on-select-all="selectAll"></Table>
 			        </TabPane>
 			        <TabPane label="win" name="win" icon="social-windows">
-			        	<Table :columns="columns" :data="win_data" @on-selection-change="selectChange"></Table>
+			        	<Table :columns="columns" :data="win_data" @on-select="select" @on-select-cancel="selectCancel" @on-select-all="selectAll"></Table>
 			        </TabPane>
 			        <TabPane label="mac" name="mac" icon="social-apple">
-			        	<Table :columns="columns" :data="mac_data" @on-selection-change="selectChange"></Table>
+			        	<Table :columns="columns" :data="mac_data" @on-select="select" @on-select-cancel="selectCancel" @on-select-all="selectAll"></Table>
 			        </TabPane>			       
 			    </Tabs>
             </div>
             <div slot="footer" class="add_footer">
             	<div class="btn_group">
-            		<Button type="ghost" @click="cancel">取消</Button>
-            	    <Button type="success" @click="add">添加</Button>
+            		<Button type="ghost" @click="modalCancel">取消</Button>
+            	    <Button type="success" @click="sure_add">添加</Button>
             	</div>
             </div>
         </Modal>
@@ -176,10 +170,9 @@
 		data() {
 				return {
 					 computer_list:[
-					   {id:"001"},
-					   {id:"002"},
-					   {id:"003"}
+					 
 					 ],
+					 select_list:[],
 					 addmodel:false,
 					 columns:[
 						 {
@@ -256,8 +249,49 @@
 				add(){
 					 
 				},
-				selectChange(select){
-					console.log(select);
+				selectAll(selects){
+					console.log(selects)
+					this.select_list = selects
+				},
+				selectCancel(select,row){
+					console.log(row)
+					this.deleteCom(row);
+				},
+				select(select,row){
+					this.addCom(row);
+				},
+				deleteCom(obj){
+					if(obj){
+						this.select_list = this.select_list.filter(function(item){
+							if(item.id!=obj.id){
+								return item;
+							}
+						})
+					}
+				},
+				addCom(obj){
+					let target =[];
+					if(obj){
+						target = this.select_list.filter(function(item){
+							if(item.id==obj.id){
+								return item;
+							}
+						})
+					};
+					if(target.length==0){
+						this.select_list.push(obj);
+					}
+				},
+				modalCancel(){
+					this.select_list = [];
+					this.addmodel = false;
+				},
+				sure_add(){
+					this.computer_list = [];
+					for(var item in this.select_list){
+						this.computer_list.push(this.select_list[item]);
+					}
+					this.addmodel = false;
 				}
 			},
 			components:{
