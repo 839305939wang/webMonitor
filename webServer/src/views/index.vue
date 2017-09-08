@@ -40,7 +40,8 @@
 			    <Row :class="{status_item:true}" :style="{height:'110px'}" :gutter="10">
 			    	<Col span="8" :class="{chart:true}">
 			    		<Card :style="{background:'#19be6b'}">
-							<div class="chart" ref="badChat">
+			    			<h4 class="">体检中心</h4>
+							<div class="card_icon card_">
 			                  
 							</div>
 						</Card>
@@ -48,15 +49,16 @@
 			    	<Col span="8" :class="{chart:true}">
 						<Card :style="{background:'#eb5e3c'}">
 							<h4 class="">体检中心</h4>
-							<div class="chart alarm_item" ref="alarmChart">
+							<div class="card_icon card_check">
                                 <Icon size="50" type="ios-medkit-outline"></Icon>
 							</div>
 						</Card>
 					</Col>
 					<Col span="8" :class="{chart:true}">
 						<Card :style="{background:'#7696de'}">
-							<div class="chart" ref="alarmChart">
-			                      <Icon size="48" type="person-stalker"></Icon>
+							<h4 class="">体检中心</h4>
+							<div class="card_icon">
+			                      <Icon size="48" type="person-stalker"></Icon>			                     
 							</div>
 						</Card>
 					</Col>
@@ -121,12 +123,13 @@
 								  </div>
 							</div>
 							<div class="mintor_List">
-								<computer v-for="info in computer_list" :key="info.id" :Data="info" @deleteComputer="deleteComputer"></computer>
+								<computer v-for="info in computer_list" :key="info.id" :Data="info" @setComputer="setComputer" @deleteComputer="deleteComputer"></computer>
 							</div>
 						</Card>
 			</Col>	
 		</Row>
 		
+		<!--监控主机添加面板-->
 		<Modal
         v-model="addmodel"
         width="650"
@@ -158,6 +161,41 @@
             </div>
         </Modal>
 		
+		<!--监控选项设置面板-->
+		<Modal v-model="adjustMode" width="650" class-name="adjust vertical-center-modal" @on-cancel="modalCancel">
+            <div class="adjustHead">
+            	<div class="adjust_title">          		
+            		 <div class="adjust_title_img">
+            		 	<img src="../../dist/static/images/win.png"/>
+            		 </div>
+            		 <div class="desc">
+            		 	Windows10_Wang(调整主机监控项顺序)
+            		 </div>
+            	</div>          
+            </div>
+            <div class="adjustBody">
+            	  <!--<div class="show_area now_show"></div>
+            	  <div class="show_area wait_show"></div>-->
+            	  <Transfer
+		        :data="data3"
+		        :target-keys="targetKeys3"
+		        :list-style="listStyle"
+		        :render-format="render3"
+		        :operations="['移除','添加']"
+		        filterable
+		        :titles="['待显示区','显示区']"
+		        @on-change="handleChange3">
+    </Transfer>
+            </div>
+            <div slot="footer" class="add_footer">
+            	<div class="btn_group">
+            		<Button type="ghost" @click="">取消</Button>
+            	    <Button type="success" @click="">确定</Button>
+            	</div>
+            </div>
+        </Modal>
+		
+		
 	</div>
 </template>
 
@@ -165,15 +203,22 @@
 	import workMark from "../components/workMark/workMark.vue";
 	import alarmBox from "../components/alarm_table";
 	import computer from "../components/computer";
-	
+	import config from "../common/config.js"
 	export default {
 		data() {
 				return {
+					data3: this.getMockData(),
+	                targetKeys3: this.getTargetKeys(),
+	                listStyle: {
+	                    width: '200px',
+	                    height: '280px'
+	                },
 					 computer_list:[
 					 
 					 ],
 					 select_list:[],
 					 addmodel:false,
+					 adjustMode:false,
 					 columns:[
 						 {
 						 	type: 'selection',
@@ -232,6 +277,28 @@
 				
 			},
 			methods: {
+					getMockData () {
+		                let mockData = config.minitor_types;
+		                return mockData;
+		            },
+		            getTargetKeys () {
+		                return []
+		            },
+		            handleChange3 (newTargetKeys) {
+		                this.targetKeys3 = newTargetKeys;
+		            },
+		            render3 (item) {
+		                return item.label + ' - ' + item.description;
+		            },
+		            reloadMockData () {
+		                this.data3 = this.getMockData();
+		                this.targetKeys3 = this.getTargetKeys();
+		            },
+		        setComputer(id){
+		        	if(id){
+		        		this.adjustMode = true
+		        	}
+		        },
 				deleteComputer(id){
 					console.log("id:"+id);
 					this.computer_list = this.computer_list.filter(function(item){
@@ -550,4 +617,47 @@
     .ivu-card-body{
     	height: 81%;
     }
+    .vertical-center-modal .ivu-modal-body{
+    	/*height:500px;*/
+    	background: #F7F9FB;
+    }
+    .adjustHead{
+    	height: 50px;
+    	line-height: 50px;
+    	background: #F7F9FB;
+    }
+    .adjust_title{
+    	display: flex;
+    	display: -webkit-flex;
+    	align-items: center;
+    }
+    .adjust_title{
+    	padding-left:10px;
+    }
+    .adjust_title .adjust_title_img{
+    	margin:10px;
+    }
+    .adjust_title img{
+    	float: left;
+    	line-height:20px;
+    }
+    .adjustBody{
+    	height:300px;
+    	width: 90%;
+    	margin: 0 auto;
+    	overflow: auto;
+    	background: #FFF;
+    	border: 1px solid gainsboro;
+    	display: flex;
+    	display:-webkit-flex;
+    	justify-content: center;
+    	align-items: center;
+    }
+    .show_area{
+    	height:250px;
+    	width:40%;
+    	border: 1px solid gainsboro;
+    	margin: 5px;
+    }
+   
 </style>

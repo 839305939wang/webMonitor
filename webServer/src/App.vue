@@ -11,6 +11,9 @@
 			                 	 	  <Icon type="ios-home-outline"></Icon>
 			                 	 </div>
 			                   <span>主页</span>
+			                   <div class="icon down">
+			                 	 	  <Icon type="ios-arrow-down"></Icon>
+			                 	 </div>
 			                </div>
 							        <div slot="content" class="menu_list">
 							             <div class="menu_item main_index">
@@ -90,6 +93,9 @@
 								         <div class="person_head imgItem">
 			                      <img src="./static/images/one.jpg" alt="" />
 			                      <span>yangyang</span>
+			                      <div class="icon down">
+				                 	 	  <Icon type="ios-arrow-down"></Icon>
+				                 	 </div>
 			                   </div>
 			                    <ul class="person_info_list" slot="content">
 								              <li>
@@ -118,7 +124,8 @@
     	return {
     		menuShow:false,
     		personShow:false,
-    		searchShow:false
+    		searchShow:false,
+    		msgListShow:false,
     	}
     },
     methods:{
@@ -171,6 +178,12 @@
           color: white;
           line-height: 30px;
           text-align: center;
+     }
+     .imgItem .icon.down{
+     	  font-size: 15px;
+     	  width:20px;
+        height:20px;
+     	 line-height:25px;
      }
       .headerBar .item.logo{
          float: left;
@@ -237,7 +250,8 @@
 		.msg_list>ul{
 			width: 350px;
 		}
-		.menu_list_icon{
+		.item.menu_list_icon{
+			float: left;
 			margin-left:30px;
 		}
 		.menu_list{

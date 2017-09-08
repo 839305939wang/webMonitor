@@ -4,8 +4,10 @@
 		      <div class="head_item name">
 		         <img src="../../../../dist/static/images/linux.png" alt="" />
 		         <span>A_Win2008_HN13 {{Data.id}}</span>
-		      </div>
+		      </div>		     
 		      <div class="head_item del" @click="del">	      	
+		      </div>
+		       <div class="head_item set" @click="set">	      	
 		      </div>
 		  </div>
 		  <div class="computer_body">
@@ -77,6 +79,11 @@
 			del(){
 				if(this.Data.id){
 					this.$emit("deleteComputer",this.Data.id)
+				}
+			},
+			set(){
+				if(this.Data.id){
+					this.$emit("setComputer",this.Data.id)
 				}
 			},
 			initCPU(){
@@ -443,6 +450,16 @@
 		margin-top: 12px;
 		margin-right:4px;
 	}
+	.head_item.set{
+		margin-top:10px;
+		float: right;
+		margin-right:10px;
+		width:26px;
+		height:26px;
+		background: url(../../../static/images/set.png);
+		border:1px solid #D1D5DA;
+		border-radius: 2px;
+	}
 	.head_item.del{
 		margin-top:10px;
 		float: right;
@@ -453,7 +470,7 @@
 		border:1px solid #D1D5DA;
 		border-radius: 2px;
 	}
-	.head_item.del:hover{
+	.head_item:hover{
 		cursor:pointer;
 		box-shadow:0px 0px 2px #8391A5;
 	}
