@@ -76,14 +76,10 @@
 		                   </div>
 		                    <div slot="title" class="msg_list_title">
 		                    	   <Button type="text" size="small" :class="{left:true}">系统消息</Button>
-								             <Button type="ghost" size="small" :class="{right:true}">忽略</Button>
+								             <Button type="ghost" size="small" :class="{right:true}" @click ="igoreAll">忽略</Button>
 								        </div>
 			                  <div slot="content" class="msg_list">
-								             <ul>
-									             	<li class="msg_item"></li>
-									             	<li class="msg_item"></li>
-									             	<li class="msg_item"></li>
-								             </ul>
+								             	<msgItem v-for = "item in msg_list" :item="item" @igore="igore"></msgItem>
 								        </div>
 							    </Poptip> 
                </div>
@@ -117,6 +113,7 @@
 </template>
 
 <script>
+	import msgItem from 'components/msg/msg_item.vue';
   import 'common/css/reset.css';
   export default {
     name: 'app',
@@ -126,17 +123,39 @@
     		personShow:false,
     		searchShow:false,
     		msgListShow:false,
+    		msg_list:[{id:'01',type:0,view:true,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'},{id:'02',type:1,view:false,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'},{id:'03',type:0,view:true,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'}]
     	}
     },
     methods:{
        close(){
        	this.menuShow = !this.menuShow
+       },
+       igore(id){
+       	 this.msg_list = this.msg_list.filter(function(item){
+       	 	  if(item.id == id){
+       	 	  	 item.view = false;
+       	 	  };
+       	 	  return item
+       	 });
+       	 
+       },
+       igoreAll(){
+       	this.msg_list = this.msg_list.filter(function(item){
+       	 	  item.view = false;
+       	 	  return item
+       	 });
        }
+    },
+    components:{
+    	msgItem
+    },
+    computed:{
+    	
     }
   }
 </script>
 
-<style>
+<style scoped>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -232,6 +251,7 @@
         border-radius: 6px;
         display: inline-block;
 		}
+	
 		.right{
 			float: right;
 		}
@@ -247,7 +267,7 @@
 		.msg_list_title{
 			height: 24px;
 		}
-		.msg_list>ul{
+		.msg_list{
 			width: 350px;
 		}
 		.item.menu_list_icon{
