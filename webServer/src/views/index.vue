@@ -369,7 +369,7 @@
 	}
 </script>
 
-<style>
+<style >
 	* {
 		padding: 0;
 		margin: 0;

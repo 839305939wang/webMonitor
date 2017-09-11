@@ -60,8 +60,14 @@
 			                 	 </div>
 		                  </div>
 		                  <div slot="content" class="search_content">
-								            <Input v-model="value" placeholder="请输入主机名称" style="width: 300px"></Input>
-								            <Button type="ghost" shape="circle" icon="ios-search"></Button>
+								            <div class="search_bar">						           
+								            	 <Input v-model="search_value" @on-change="search" autofocus="true" placeholder="请输入主机名称" style="width: 90%"></Input>
+								               <Button type="ghost" shape="circle" icon="ios-search" @click="search"></Button>
+								            </div>
+								            <div class="search_reasult">
+								            	<searchResult v-for="item in searchResults" :item="item"></searchResult>
+								            	
+								            </div>
 								      </div>
 		                </Poptip>
                </div>
@@ -114,6 +120,7 @@
 
 <script>
 	import msgItem from 'components/msg/msg_item.vue';
+	import searchResult from 'components/search/searchResult.vue';
   import 'common/css/reset.css';
   export default {
     name: 'app',
@@ -123,10 +130,19 @@
     		personShow:false,
     		searchShow:false,
     		msgListShow:false,
+    		searchResults:[],
+    		search_value:'',
     		msg_list:[{id:'01',type:0,view:true,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'},{id:'02',type:1,view:false,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'},{id:'03',type:0,view:true,msg:'通过设置icon属性在Button内嵌入一个Icon，或者直接在Button内使用Icon组件。'}]
     	}
     },
     methods:{
+    	search(item){
+    		if(!this.search_value){
+    			this.searchResults = [];
+    			return;
+    		}
+    		this.searchResults = [{id:"CTX001",type:0,name:"win_10_ss",ip:'172.10.2.25'},{id:"CTX001",type:0,name:"win_10_ss",ip:'172.10.2.25'},{id:"CTX001",type:0,name:"win_10_ss",ip:'172.10.2.25'}];
+    	},
        close(){
        	this.menuShow = !this.menuShow
        },
@@ -147,7 +163,8 @@
        }
     },
     components:{
-    	msgItem
+    	msgItem,
+    	searchResult
     },
     computed:{
     	
@@ -294,7 +311,15 @@
 			text-align: center;
 		}
 		.search_content{
-			width:340px;
+			width:350px;
+		}
+		.search_bar{
+			box-sizing:border-box;
+			padding:10px;
+			border-bottom: 1px solid #e6dbdb;
+		}
+		.search_content .ivu-input{
+			 border-radius:0px;
 		}
 		.search_icon .ivu-poptip-rel{
 			margin-top: 8px;
