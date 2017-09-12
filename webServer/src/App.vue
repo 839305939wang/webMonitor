@@ -61,7 +61,7 @@
 		                  </div>
 		                  <div slot="content" class="search_content">
 								            <div class="search_bar">						           
-								            	 <Input v-model="search_value" @on-change="search" autofocus="true" placeholder="请输入主机名称" style="width: 90%"></Input>
+								            	 <Input v-model="search_value" @on-change="search" placeholder="请输入主机名称" style="width: 90%"></Input>
 								               <Button type="ghost" shape="circle" icon="ios-search" @click="search"></Button>
 								            </div>
 								            <div class="search_reasult">

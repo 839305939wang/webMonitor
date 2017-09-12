@@ -5,3 +5,19 @@
 		padding:0;
 }
 
+/**
+ * 主机页面
+ */
+    .flexCell .ivu-table-cell{
+    	position: relative;
+    }
+     .flexCell .ivu-table-cell>div:nth-child(1){
+     	position: relative;
+     	border:1px solid silver;
+     }
+	.flexCell .ivu-table-cell>div:nth-child(2){
+	   position: absolute;
+	   top: 3px;
+	   left: 43%;
+    }
+

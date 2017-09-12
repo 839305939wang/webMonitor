@@ -148,9 +148,9 @@
 			        <TabPane label="win" name="win" icon="social-windows">
 			        	<Table :columns="columns" :data="win_data" @on-select="select" @on-select-cancel="selectCancel" @on-select-all="selectAll"></Table>
 			        </TabPane>
-			        <TabPane label="mac" name="mac" icon="social-apple">
+			  <!--      <TabPane label="mac" name="mac" icon="social-apple">
 			        	<Table :columns="columns" :data="mac_data" @on-select="select" @on-select-cancel="selectCancel" @on-select-all="selectAll"></Table>
-			        </TabPane>			       
+			        </TabPane>		-->	       
 			    </Tabs>
             </div>
             <div slot="footer" class="add_footer">
