@@ -52,7 +52,8 @@
 	                        	  	style:{
 	                        	  		height:'40px',
 	                        	  		width:'40px',
-	                        	  		float:'left'
+	                        	  		float:'left',
+	                        	  		cursor:'pointer'
 	                        	  	}
 	                        	  },[
 	                        	    h('img',{
@@ -60,7 +61,13 @@
 	                        	    		src:params.row.type==1?'../../../static/images/linux_m.png':'../../../static/images/win_m.png'
 	                        	    	},
 	                        	    	style:{
-	                        	    		marginTop:'5px'
+	                        	    		marginTop:'5px',
+	                        	    		
+	                        	    	},
+	                        	    	on:{
+	                        	    		click:()=>{
+	                        	    			this.$router.push('/computerDetail?id="001"')
+	                        	    		}
 	                        	    	}
 	                        	    })
 	                        	  ]),
@@ -321,5 +328,8 @@
     
     .master_list{
     	padding: 20px 30px;
+    }
+    .zidigyicell.tableCelleImg{
+    	cursor:pointer;
     }
 </style>

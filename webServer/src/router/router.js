@@ -3,6 +3,6 @@ const routers = [{
     meta: {
         title: ''
     },
-    component: (resolve) => require(['../views/master.vue'], resolve)
+    component: (resolve) => require(['../views/computerDetail.vue'], resolve)
 }];
 export default routers;
