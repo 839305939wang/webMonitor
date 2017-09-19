@@ -5,7 +5,7 @@ import Routers from './router/router';
 import Vuex from 'vuex';
 import iView from 'iview';
 import echart from "echarts";
-import store from "./store/store"
+/*import store from "./store/store"*/
 import 'iview/dist/styles/iview.css';
 import highcharts from 'highcharts';
 import "./common/css/animate.css";
@@ -36,6 +36,6 @@ router.afterEach(() => {
 new Vue({
     el: '#app',
     router: router,
-    store: store,
+   /* store: store,*/
     render: h => h(App)
 });

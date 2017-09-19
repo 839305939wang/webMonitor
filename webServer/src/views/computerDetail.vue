@@ -2,7 +2,7 @@
 	<div class="computerDetail">
 		  <Collapse v-model="value1">
 	        <Panel name="1">
-	                       基本信息
+	                        基本信息<span class="">&nbsp;(<span class="tijian_report" @click.stop.default="tijian">&nbsp;体检报告:<span class="error">&nbsp;<Icon type="alert"></Icon>&nbsp;1项严重问题</span>&nbsp;<span class="general"><Icon type="alert-circled"></Icon>&nbsp;2项一般问题</span></span>)</span>
 	            <div slot="content" class="computerDetail_base">
 	            	  <div class="computerDetail_base_item">
 	            	  	   <div class="computerDetail_img">
@@ -58,7 +58,7 @@
 	            </div>
 	        </Panel>    
 	        <Panel name="2">
-	                       监控概览<span class="refresh" @click.stop.default="refresh">刷新(每五分钟自动刷新)</span>
+	                       监控概览<span class="right" @click.stop.default="refresh">刷新(每五分钟自动刷新)</span>
 	            <div slot="content">
 	            	<div class="computerDetail_chart_item cpu">
 	            		<div class="chart"  ref = "cpu">
@@ -311,6 +311,9 @@
 		methods:{
 			refresh(){//刷新
 				console.log("刷新")
+			},
+			tijian(){
+				this.$route.push("/tijianReport")
 			},
 			rebootM(){
 				this.reboot = true;
@@ -768,7 +771,7 @@
     	color: #2BAEE9;
     }
     
-    .refresh{
+    .right{
     	float: right;
     	margin-right: 30px;
     }
@@ -776,5 +779,14 @@
     	height: 35px;
     	line-height: 35px;
     	text-align: left;
+    }
+    .tijian_report{
+    	color: #888;
+    }
+    .error{
+    	color:#A52A2A;
+    }
+    .general{
+    	color: #DEB887;
     }
 </style>
