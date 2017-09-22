@@ -20,6 +20,6 @@
 	   top: 3px;
 	   left: 43%;
     }
-	.computerDetail .ivu-collapse > .ivu-collapse-item > .ivu-collapse-header{
-		text-align: left;
+	 .ivu-collapse > .ivu-collapse-item > .ivu-collapse-header{
+	 	text-align: left;
 	}
