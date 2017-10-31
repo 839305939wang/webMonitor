@@ -125,15 +125,17 @@
 			        <Panel name="1">
 			                     可用性
 			            <div slot="content">
-			            	<reportDetailItem title="可用率"></reportDetailItem>
-			            	<reportDetailItem title="告警记录"></reportDetailItem>
+			            	<reportDetailItem title="可用率" :size="'msmall'">
+			            		<useable></useable>
+			            	</reportDetailItem>
+			            	<reportDetailItem title="告警记录" :size="'msmall'"></reportDetailItem>
 			            	<reportDetailItem title="磁盘分区使用率"></reportDetailItem>
 			            </div>
 			        </Panel>
 			        <Panel name="2">
 			                     安全性
 				           <div slot="content">
-				            <reportDetailItem title="网络安全"></reportDetailItem>
+				            <reportDetailItem title="网络安全" :size="'msmall'"></reportDetailItem>
 			            	<reportDetailItem title="端口服务"></reportDetailItem>
 			            	<reportDetailItem title="公网如站流量"></reportDetailItem>
 				          </div>
@@ -161,6 +163,7 @@
 
 <script>
 	import reportDetailItem from "../components/tijianReportItem/reportDetailItem.vue"
+	import useable from  "../components/tijianReportItem/reportDetailList/useable.vue"
 	export default{
 		data(){
 			return{
@@ -172,7 +175,8 @@
 			}
 		},
 		components:{
-			reportDetailItem
+			reportDetailItem,
+			useable
 		}
 	}
 </script>

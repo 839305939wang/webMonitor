@@ -4,7 +4,12 @@
 .search_icon .ivu-poptip-body{
 		padding:0;
 }
-
+.person .ivu-poptip-body{
+		padding:0;
+}
+.ivu-poptip-body-content{
+   overflow: hidden;	
+}
 /**
  * 主机页面
  */
@@ -14,6 +19,7 @@
      .flexCell .ivu-table-cell>div:nth-child(1){
      	position: relative;
      	border:1px solid silver;
+     	text-align: left;
      }
 	.flexCell .ivu-table-cell>div:nth-child(2){
 	   position: absolute;

@@ -3,6 +3,6 @@ const routers = [{
     meta: {
         title: ''
     },
-    component: (resolve) => require(['../views/tijianReport.vue'], resolve)
+    component: (resolve) => require(['../views/tijianReportDetail.vue'], resolve)
 }];
 export default routers;
